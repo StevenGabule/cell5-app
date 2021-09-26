@@ -29,6 +29,9 @@ export async function getPersonHandler(req: Request, res: Response) {
   try {
     const _id = get(req, "params.personId");
     const person = await findPerson({ _id })
+    if (person != null) {
+      person.__v = undefined;
+    }
     return res.status(200).json(person)
   } catch (error: any) {
     return res.status(400).json({
