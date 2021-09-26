@@ -1,15 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import { ButtonGroup, Col, Container, Row, Table } from 'react-bootstrap';
+import React, { ChangeEvent, useEffect, useState } from 'react';
+import {
+  ButtonGroup,
+  Col,
+  Container,
+  Form,
+  Row,
+  Table,
+  Button,
+} from 'react-bootstrap';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
 const PersonIndex: React.FC = () => {
   const [persons, setPersons] = useState<any[]>([]);
+  const [filter, setFilter] = useState('');
+  const [sort, setSort] = useState('asc');
 
   const fetchPerson = async () => {
     try {
-      const { data } = await axios.get('/person');
+      const { data } = await axios.get(
+        `${filter !== '' ? `/person?sort=${sort}&${filter}=true` : '/person'}`
+      );
       setPersons(data);
     } catch (error) {
       console.log(error);
@@ -18,13 +30,22 @@ const PersonIndex: React.FC = () => {
 
   useEffect(() => {
     fetchPerson();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function handleDelete(id: number) {
     if (window.confirm('Are you sure you want to delete this record?')) {
       await axios.delete(`/person/${id}`);
-      fetchPerson();
+      await fetchPerson();
     }
+  }
+
+  async function handleChangeFilter(event: ChangeEvent<HTMLSelectElement>) {
+    setFilter(event.target.value);
+  }
+
+  function handleSort(event: ChangeEvent<HTMLSelectElement>) {
+    setSort(event.target.value);
   }
 
   return (
@@ -32,9 +53,38 @@ const PersonIndex: React.FC = () => {
       <Row>
         <Col lg={12}>
           <h2>Person Page</h2>
-          <Link to='/create' className='btn btn-primary btn-sm'>
-            Create
-          </Link>
+          <div className='d-flex justify-content-between mb-3'>
+            <Link
+              to='/create'
+              className='btn btn-primary btn-sm align-self-center'
+            >
+              Create
+            </Link>
+
+            <div className='align-self-center d-flex w-50'>
+              <Form.Select
+                onChange={handleSort}
+                value={sort}
+                aria-label='Default select example'
+              >
+                <option>Sort By</option>
+                <option value='asc'>ASCENDING</option>
+                <option value='desc'>DESCENDING</option>
+              </Form.Select>
+
+              <Form.Select
+                onChange={handleChangeFilter}
+                value={filter}
+                aria-label='Default select example'
+              >
+                <option>Filter By</option>
+                <option value='firstName'>Firstname</option>
+                <option value='lastName'>Lastname</option>
+              </Form.Select>
+              <Button onClick={fetchPerson}>Change</Button>
+            </div>
+          </div>
+
           <Table striped bordered hover>
             <thead>
               <tr>
