@@ -4,7 +4,7 @@ import { get } from 'lodash'
 
 export async function indexPersonHandler(req: Request, res: Response) {
   try {
-    const persons = await findAll({})
+    const persons = await findAll({}, req.query)
     return res.status(200).json(persons)
   } catch (error: any) {
     return res.status(400).json({
