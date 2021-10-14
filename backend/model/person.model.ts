@@ -1,9 +1,9 @@
 import mongoose from 'mongoose'
-
 export interface PersonDocument extends mongoose.Document {
+  username: string;
   firstName: string;
   lastName: string;
-  bornDate: Date;
+  bornDate: String;
   height: string;
   spouse: string;
   motherName: string;
@@ -14,14 +14,15 @@ export interface PersonDocument extends mongoose.Document {
 }
 
 const PersonSchema = new mongoose.Schema({
+  username: { type: String, required: true, unique: true },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
-  bornDate: { type: Date, required: true },
+  bornDate: { type: String, required: true },
   height: { type: String, required: true },
-  spouse: { type: String },
-  motherName: { type: String },
-  fatherName: { type: String },
-  avatar_url: { type: String },
+  spouse: { type: String, default: 'N/A' },
+  motherName: { type: String, default: 'N/A' },
+  fatherName: { type: String, default: 'N/A' },
+  avatar_url: { type: String, default: '' },
 }, {
   timestamps: true,
   toJSON: {

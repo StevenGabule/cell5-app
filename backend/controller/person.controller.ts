@@ -15,8 +15,7 @@ export async function indexPersonHandler(req: Request, res: Response) {
 
 export async function createPersonHandler(req: Request, res: Response) {
   try {
-    const body = req.body;
-    const person = await createPerson(body)
+    const person = await createPerson(req.body)
     return res.status(201).json(person)
   } catch (error: any) {
     return res.status(400).json({

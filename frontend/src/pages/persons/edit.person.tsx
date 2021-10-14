@@ -4,6 +4,7 @@ import { Card, Col, Container, Form, Row, Button } from 'react-bootstrap';
 
 const INITIAL_VALUE = {
   avatar_url: '',
+  username: '',
   firstName: '',
   lastName: '',
   bornDate: '',
@@ -33,6 +34,7 @@ function PersonEdit({ history, match }: { history: any; match: any }) {
     try {
       const id = match.params.id;
       const { data } = await axios.get(`/person/${id}`);
+      console.log(data);
       setPerson(data);
     } catch (error: any) {
       console.log(error.message);
@@ -72,7 +74,7 @@ function PersonEdit({ history, match }: { history: any; match: any }) {
 
             <Card.Body>
               <Form onSubmit={handleSubmit}>
-                <Form.Group className='mb-3' controlId='formBasicEmail'>
+                <Form.Group className='mb-3' controlId='formAvatar'>
                   <Form.Label>Avatar URL</Form.Label>
                   <Form.Control
                     type='text'
@@ -82,7 +84,17 @@ function PersonEdit({ history, match }: { history: any; match: any }) {
                   />
                 </Form.Group>
 
-                <Form.Group className='mb-3' controlId='formBasicEmail'>
+                <Form.Group className='mb-3' controlId='formUsername'>
+                  <Form.Label>Username</Form.Label>
+                  <Form.Control
+                    type='text'
+                    name='username'
+                    value={person.username}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+
+                <Form.Group className='mb-3' controlId='formFirstname'>
                   <Form.Label>First Name</Form.Label>
                   <Form.Control
                     type='text'
@@ -92,7 +104,7 @@ function PersonEdit({ history, match }: { history: any; match: any }) {
                   />
                 </Form.Group>
 
-                <Form.Group className='mb-3' controlId='formBasicPassword'>
+                <Form.Group className='mb-3' controlId='formLastname'>
                   <Form.Label>Last name</Form.Label>
                   <Form.Control
                     type='text'
@@ -102,17 +114,17 @@ function PersonEdit({ history, match }: { history: any; match: any }) {
                   />
                 </Form.Group>
 
-                <Form.Group className='mb-3'>
+                <Form.Group className='mb-3' controlId='formBornDate'>
                   <Form.Label>Born Date</Form.Label>
                   <Form.Control
-                    type='date'
+                    type='text'
                     name='bornDate'
                     value={person.bornDate}
                     onChange={handleChange}
                   />
                 </Form.Group>
 
-                <Form.Group className='mb-3' controlId='formBasicPassword'>
+                <Form.Group className='mb-3' controlId='formHeight'>
                   <Form.Label>Height</Form.Label>
                   <Form.Control
                     type='text'
@@ -122,7 +134,7 @@ function PersonEdit({ history, match }: { history: any; match: any }) {
                   />
                 </Form.Group>
 
-                <Form.Group className='mb-3' controlId='formBasicPassword'>
+                <Form.Group className='mb-3' controlId='formSpouse'>
                   <Form.Label>Spouse</Form.Label>
                   <Form.Control
                     type='text'
@@ -132,7 +144,7 @@ function PersonEdit({ history, match }: { history: any; match: any }) {
                   />
                 </Form.Group>
 
-                <Form.Group className='mb-3' controlId='formBasicPassword'>
+                <Form.Group className='mb-3' controlId='formMotherName'>
                   <Form.Label>Mother Name</Form.Label>
                   <Form.Control
                     type='text'
@@ -142,7 +154,7 @@ function PersonEdit({ history, match }: { history: any; match: any }) {
                   />
                 </Form.Group>
 
-                <Form.Group className='mb-3' controlId='formBasicPassword'>
+                <Form.Group className='mb-3' controlId='formFatherName'>
                   <Form.Label>Father Name</Form.Label>
                   <Form.Control
                     type='text'

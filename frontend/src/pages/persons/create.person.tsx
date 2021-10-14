@@ -4,14 +4,16 @@ import { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react';
 import { Card, Col, Container, Form, Row } from 'react-bootstrap';
 
 const INITIAL_VALUE = {
-  avatar_url: '',
-  firstName: '',
-  lastName: '',
-  bornDate: '',
-  height: '',
-  spouse: '',
-  motherName: '',
-  fatherName: '',
+  avatar_url:
+    'https://images.unsplash.com/profile-fb-1460825798-70fae2b76594.jpg?dpr=1&auto=format&fit=crop&w=150&h=150&q=60&crop=faces&bg=fff',
+  username: 'jp_gabule',
+  firstName: 'John Paul',
+  lastName: 'Gabule',
+  bornDate: '07/22/1990',
+  height: "5'6",
+  spouse: 'Secret spouce',
+  motherName: 'Mother name',
+  fatherName: 'Father name',
 };
 
 function PersonCreate({ history }: { history: any }) {
@@ -58,7 +60,7 @@ function PersonCreate({ history }: { history: any }) {
 
             <Card.Body>
               <Form onSubmit={handleSubmit}>
-                <Form.Group className='mb-3' controlId='formBasicEmail'>
+                <Form.Group className='mb-3' controlId='formAvatarID'>
                   <Form.Label>Avatar URL</Form.Label>
                   <Form.Control
                     type='text'
@@ -68,7 +70,17 @@ function PersonCreate({ history }: { history: any }) {
                   />
                 </Form.Group>
 
-                <Form.Group className='mb-3' controlId='formBasicEmail'>
+                <Form.Group className='mb-3' controlId='formUsername'>
+                  <Form.Label>Username</Form.Label>
+                  <Form.Control
+                    type='text'
+                    name='username'
+                    value={person.username}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+
+                <Form.Group className='mb-3' controlId='formFirstName'>
                   <Form.Label>First Name</Form.Label>
                   <Form.Control
                     type='text'
@@ -78,7 +90,7 @@ function PersonCreate({ history }: { history: any }) {
                   />
                 </Form.Group>
 
-                <Form.Group className='mb-3' controlId='formBasicPassword'>
+                <Form.Group className='mb-3' controlId='formLastname'>
                   <Form.Label>Last name</Form.Label>
                   <Form.Control
                     type='text'
@@ -88,17 +100,17 @@ function PersonCreate({ history }: { history: any }) {
                   />
                 </Form.Group>
 
-                <Form.Group className='mb-3'>
+                <Form.Group className='mb-3' controlId='formBornDate'>
                   <Form.Label>Born Date</Form.Label>
                   <Form.Control
-                    type='date'
+                    type='text'
                     name='bornDate'
                     value={person.bornDate}
                     onChange={handleChange}
                   />
                 </Form.Group>
 
-                <Form.Group className='mb-3' controlId='formBasicPassword'>
+                <Form.Group className='mb-3' controlId='formHeight'>
                   <Form.Label>Height</Form.Label>
                   <Form.Control
                     type='text'
@@ -108,7 +120,7 @@ function PersonCreate({ history }: { history: any }) {
                   />
                 </Form.Group>
 
-                <Form.Group className='mb-3' controlId='formBasicPassword'>
+                <Form.Group className='mb-3' controlId='formSpouse'>
                   <Form.Label>Spouse</Form.Label>
                   <Form.Control
                     type='text'
@@ -118,7 +130,7 @@ function PersonCreate({ history }: { history: any }) {
                   />
                 </Form.Group>
 
-                <Form.Group className='mb-3' controlId='formBasicPassword'>
+                <Form.Group className='mb-3' controlId='formMotherName'>
                   <Form.Label>Mother Name</Form.Label>
                   <Form.Control
                     type='text'
@@ -128,7 +140,7 @@ function PersonCreate({ history }: { history: any }) {
                   />
                 </Form.Group>
 
-                <Form.Group className='mb-3' controlId='formBasicPassword'>
+                <Form.Group className='mb-3' controlId='formFatherName'>
                   <Form.Label>Father Name</Form.Label>
                   <Form.Control
                     type='text'
