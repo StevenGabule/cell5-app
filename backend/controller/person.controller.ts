@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { findAll, createPerson, findPerson, findAndUpdate, deletePerson } from "../service/person.service";
 import { get } from 'lodash'
+import { log } from "console";
 
 export async function indexPersonHandler(req: Request, res: Response) {
   try {
@@ -15,8 +16,9 @@ export async function indexPersonHandler(req: Request, res: Response) {
 
 export async function createPersonHandler(req: Request, res: Response) {
   try {
-    const person = await createPerson(req.body)
-    return res.status(201).json(person)
+    const body = req.body;
+    const person = await createPerson(body)
+    res.status(201).send(person)
   } catch (error: any) {
     return res.status(400).json({
       error: error.message
@@ -28,9 +30,7 @@ export async function getPersonHandler(req: Request, res: Response) {
   try {
     const _id = get(req, "params.personId");
     const person = await findPerson({ _id })
-    if (person != null) {
-      person.__v = undefined;
-    }
+    if (!person) return res.status(404).send("Developer not found!")
     return res.status(200).json(person)
   } catch (error: any) {
     return res.status(400).json({

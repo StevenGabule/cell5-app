@@ -9,8 +9,8 @@ export interface PersonDocument extends mongoose.Document {
   motherName: string;
   fatherName: string;
   avatar_url: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 const PersonSchema = new mongoose.Schema({
