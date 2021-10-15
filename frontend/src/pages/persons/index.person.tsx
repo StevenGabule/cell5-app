@@ -167,7 +167,7 @@ const PersonIndex: React.FC = () => {
               ))}
             </tbody>
           </Table>
-          {profile && (
+          {profile && Object.keys(profile).length !== 0 && (
             <Card>
               <Card.Body>
                 <Image src={profile.avatar_url} alt={profile.name} /> <br />
