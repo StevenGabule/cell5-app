@@ -1,4 +1,3 @@
-import express from 'express'
 import config from 'config'
 import log from './log'
 import connect from './db/connect'
@@ -11,3 +10,4 @@ app.listen(port, host, async () => {
   log.info(`App is listening to http://${host}:${port}`)
   await connect();
 })
+

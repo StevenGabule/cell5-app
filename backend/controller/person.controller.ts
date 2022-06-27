@@ -1,12 +1,11 @@
 import { Request, Response } from "express";
 import { findAll, createPerson, findPerson, findAndUpdate, deletePerson } from "../service/person.service";
 import { get } from 'lodash'
-import { log } from "console";
 
 export async function indexPersonHandler(req: Request, res: Response) {
   try {
-    const persons = await findAll({}, req.query)
-    return res.status(200).json(persons)
+    const persons = await findAll({}, req.query);
+    return res.status(200).json(persons);
   } catch (error: any) {
     return res.status(400).json({
       error: error.message
@@ -17,8 +16,8 @@ export async function indexPersonHandler(req: Request, res: Response) {
 export async function createPersonHandler(req: Request, res: Response) {
   try {
     const body = req.body;
-    const person = await createPerson(body)
-    res.status(201).send(person)
+    const person = await createPerson(body);
+    res.status(201).send(person);
   } catch (error: any) {
     return res.status(400).json({
       error: error.message

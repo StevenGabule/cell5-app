@@ -2,11 +2,10 @@ import supertest from "supertest"
 import createServer from '../utils/createServer'
 import { MongoMemoryServer } from 'mongodb-memory-server'
 import mongoose from "mongoose"
-import { createPersonHandler } from "../controller/person.controller"
 import { createPerson } from "../service/person.service"
 
 const app = createServer()
-const userId = new mongoose.Types.ObjectId().toString();
+
 export const developerPayload = {
   username: "jp_gabs",
   firstName: "Mike Paul",
